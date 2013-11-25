@@ -1,16 +1,15 @@
-Rain[]drops= new Snow[1800];
-Catcher catch;
+Rain[]drops= new Rain[1800];
 void setup(){
   size(500,500);
-  for(int i=0; i<flakes.length;i++){
-    flakes[i]=new Snow();
+  for(int i=0; i<drops.length;i++){
+    drops[i]=new Rain();
 }
 }
 void draw(){
  background(0,50,100);
- for(int i=0; i<flakes.length;i++){
-   flakes[i].display();
-   flakes[i].fall();
-   flakes[i].restart();
+ for(int i=0; i<drops.length;i++){
+   drops[i].display();
+   drops[i].fall();
+   drops[i].restart();
 }
 }
