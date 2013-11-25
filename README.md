@@ -1,0 +1,1 @@
+Use your mouse to move the catcher and catch the raindrops falling on the screen.
