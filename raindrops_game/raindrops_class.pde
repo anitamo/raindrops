@@ -7,6 +7,7 @@ class Rain{
     vel = new PVector(0,2);
   }
   void display(){
+    fill(255,255,255);
     ellipse(loc.x,loc.y,10,10);
   }
   void fall(){
