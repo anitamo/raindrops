@@ -1,22 +1,23 @@
-class Rain{
-  PVector loc;
-  PVector vel;
-  
-  Rain(){
-    loc = new PVector(random(width),random(height));
-    vel = new PVector(0,2);
+class Rain {
+  PVector loc, vel, acc;
+  PImage raindrop;
+  float d;
+  Rain() {
+    raindrop = loadImage("raindrop.png");
+    loc = new PVector(random(width), -d);
+    vel = new PVector(0, 2);
+    d=10;
   }
-  void display(){
-    fill(255,255,255);
-    ellipse(loc.x,loc.y,10,10);
+  void display() {
+    image(raindrop, loc.x, loc.y, d, d);
   }
-  void fall(){
+  void fall() {
     loc.add(vel);
   }
-  void restart(){
-    if(loc.y>height){
-      loc.y=0;
-      vel.y=2;
-    }
+  void caught() {
+    loc.set(height*2, 0);
+    vel.set(0, 0);
+    acc.set(0, 0);
   }
+}
 }

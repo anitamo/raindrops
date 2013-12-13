@@ -1,20 +1,30 @@
 class Catcher {
-  PVector loc;
-  int x,y;
+  PVector loc, vel;
+  PImage umbrella;
+  int d;
 
   Catcher() {
-    loc = new PVector(mouseX, height-y);
-    x = 70;
-    y= 20;
+    umbrella= loadImage("umbrella.png");
+    loc = new PVector(mouseX, height-d);
+    d=25;
   }
 
   void display() {
-    fill(224,20,20);
-    rect(loc.x, loc.y, x, y);
+    image(umbrella, loc.x, loc.y, d,d);
   }
 
   void update() {
-    loc.set(mouseX, height-40);
+    loc.set(mouseX, height-d);
+  }
+boolean catchDrop(Rain fall){
+  if(loc.dist(fall.loc) < d/2 + fall.d/2){
+    fall.caught();
+    return true;
+  }
+  else{
+    return false;
   }
 }
+}
+
    
