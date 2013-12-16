@@ -3,7 +3,7 @@ class Rain {
   PImage raindrop;
   float d;
   Rain() {
-    raindrop = loadImage("raindrop.png");
+    raindrop = loadImage("rain-drop.png");
     loc = new PVector(random(width), -d);
     vel = new PVector(0, 2);
     d=10;
@@ -17,7 +17,6 @@ class Rain {
   void caught() {
     loc.set(height*2, 0);
     vel.set(0, 0);
-    acc.set(0, 0);
   }
 }
-}
+

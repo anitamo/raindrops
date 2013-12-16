@@ -6,10 +6,11 @@ class Catcher {
   Catcher() {
     umbrella= loadImage("umbrella.png");
     loc = new PVector(mouseX, height-d);
-    d=25;
+    d=100;
   }
 
   void display() {
+    imageMode(CENTER);
     image(umbrella, loc.x, loc.y, d,d);
   }
 
