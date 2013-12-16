@@ -9,6 +9,7 @@ class Catcher {
     d=100;
   }
 
+ //sets the location of the umbrella to follow the mouse
   void display() {
     imageMode(CENTER);
     image(umbrella, loc.x, loc.y, d,d);
@@ -17,6 +18,8 @@ class Catcher {
   void update() {
     loc.set(mouseX, height-d);
   }
+  
+//if a raindrop touches the umbrella, it disappears  
 boolean catchDrop(Rain fall){
   if(loc.dist(fall.loc) < d/2 + fall.d/2){
     fall.caught();
