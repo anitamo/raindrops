@@ -1,30 +1,44 @@
 Rain[]drops= new Rain[1000];
 Catcher c1;
+int x,y, w, h;
+int rx,ry, rw, rh;
 int oldtime =0;
 int index = 1;
 int score;
 int threshold = 2000;
 PImage background;
-boolean start = true;
+boolean start = false;
 
 void setup() {
+  y=0;
+  w=50;
+  h=height;
+  colorMode(HSB,width,100,100);
   //sets the background as a playground image
   background = loadImage("playground.png");
   size(background.width, background.height);
-  c1 = new Catcher();
+  c1 = new Catcher();    
   //controls when the rain class works
   for (int i=0; i< drops.length;i++) {
     drops[i]=new Rain();
   }
   c1 = new Catcher();
+  ry= height/2;
+  rx= width/2;
+  rw=50;
+  rh=50;
 }
 void draw() {
-  if (start == true) {
-    background(0);
+  if (start == false) {
+     x=0;
+  for (int x=0; x<=width; x+=w) {
+    fill(dist(mouseX,0,x,0),100,100);
+    rect(x, y, w, h);
+  }
     fill(87, 252, 118);
     rect(width/2, height/2, 50, 50);
   }
-  if(start == false){
+  if(start == true){
     background(background);
     textSize(60);
     fill(0);
@@ -52,4 +66,8 @@ void draw() {
     }
   }
   }
-
+  void mousePressed(){
+    if(mouseX>rx && mouseX<rx+rw && mouseY>ry && mouseY<ry+rh){
+      start=true;
+    }
+  }
