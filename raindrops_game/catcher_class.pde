@@ -26,6 +26,9 @@ boolean catchDrop(Rain fall){
     return false;
   }
 }
+void catcherleave(){
+  if(gameover == true){
+    loc.set(height*2,0);
 }
 
    

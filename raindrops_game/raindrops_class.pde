@@ -15,8 +15,18 @@ class Rain {
     loc.add(vel);
   }
   void caught() {
+    loc.set(random(width), 0);
+    vel.set(0, random(0, 2));
+  }
+  void leave() {
     loc.set(height*2, 0);
     vel.set(0, 0);
+  }
+  void die() {
+    if (loc.x >= height) {
+      die--;
+      leave();
+    }
   }
 }
 
