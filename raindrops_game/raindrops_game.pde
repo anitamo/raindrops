@@ -1,12 +1,14 @@
-Rain[]drops= new Rain[10];
+Rain[]drops= new Rain[100];
 Catcher c1;
 int oldtime =0;
+int currenttime;
 int index = 0;
-int score;
+int score=0;
 int threshold = 2000;
 int die;
+int lives = 3;
 boolean start;
-boolean end= false;
+boolean end;
 PImage background;
 
 void setup() {
@@ -18,53 +20,67 @@ void setup() {
   }
   c1 = new Catcher();
   start=false;
-  die = 3;
+  end = false;
 }
 void draw() {
-  background(0);
-  fill(131, 229, 100);
-  rectMode(CENTER);
-  rect(250, 400, 300, 150);
-  textSize(40);
-  textAlign(CENTER);
-  fill(250, 250, 250);
-  text("START", 250, 450);
+  if (start == false && end == false) {
+    background(0);
+    fill(131, 229, 100);
+    rectMode(CENTER);
+    rect(250, 400, 300, 150);
+    textSize(40);
+    textAlign(CENTER);
+    fill(250, 250, 250);
+    text("START", 250, 450);
+  }
 
-  if (start) {
+  if (start== true && end == false) {
     background(background);
     textSize(50);
     fill(0);
     text(score, 300, 100);
-    c1.display();
-    c1.update();
+     fill(255);
+    textAlign(CORNER);
+    text("Lives:" + lives, 0, height-30*1.15); //displays current lives on screen
+
+    currenttime = millis();
     if (millis()-oldtime > threshold) {
-      if (index < drops.length) {
+      oldtime = currenttime;
         index++;
-        oldtime = millis();
-      }
     }
     for (int i=0; i<index;i++) {
       drops[i].display();
       drops[i].fall();
-      drops[i].die();
+      drops[i].die(); 
+      c1.display();
+      c1.update();
+      c1.catchDrop(drops[i]);
 
-      if (die == 0) {
-        gameover = true;
+      if (drops[i].loc.y >= height) {
+        lives-=1;
+        drops[i].loc.set(width*10, -height);
+        drops[i].vel.set(0, 0);
       }
       if (c1.catchDrop(drops[i])==true) {
         drops[i].leave();
         score++;
-        threshold-=10;
+         //When the score increases, the time between falling raindrops will be decreased and they will start to fall faster
+        threshold-=15;
       }
-      if (gameover == true) {
-        raindrops[i].leave();
-        catcher.catcherleave();
-        background(0);
-      }
+    }
+    if (lives <=0) {
+      end = true;
+    }
+    if (end == true) {
+      c1.catcherleave();
+      background(0);
+      fill(255, 0, 0);
+      textAlign(CENTER);
+      textSize(80);
+      text("GAME OVER", width/2, height/2);
     }
   }
 }
-
 void mousePressed() {
   if (mouseX>100  && mouseX< 400 && mouseY>325 && mouseY<475) {
     start=!start;
