@@ -3,7 +3,7 @@ Catcher c1;
 int oldtime =0;
 int currenttime;
 int index = 0;
-int score=0;
+int score;
 int threshold = 2000;
 int die;
 int lives = 3;
@@ -37,11 +37,10 @@ void draw() {
   if (start== true && end == false) {
     background(background);
     textSize(50);
-    fill(0);
-    text(score, 300, 100);
-     fill(255);
+    fill(255);
+    text(score, 10, 100);
     textAlign(CORNER);
-    text("Lives:" + lives, 0, height-30*1.15); //displays current lives on screen
+    text("Lives:" + lives, 0, height-30); //displays current lives on screen
 
     currenttime = millis();
     if (millis()-oldtime > threshold) {
@@ -54,19 +53,19 @@ void draw() {
       drops[i].die(); 
       c1.display();
       c1.update();
-      c1.catchDrop(drops[i]);
+      //c1.catchDrop(drops[i]);
 
       if (drops[i].loc.y >= height) {
         lives-=1;
         drops[i].loc.set(width*10, -height);
         drops[i].vel.set(0, 0);
       }
-      if (c1.catchDrop(drops[i])==true) {
-        drops[i].leave();
-        score++;
+     if (c1.catchDrop(drops[i])==true) {
+       drops[i].caught();
+        score+=1;
          //When the score increases, the time between falling raindrops will be decreased and they will start to fall faster
         threshold-=15;
-      }
+     }
     }
     if (lives <=0) {
       end = true;
