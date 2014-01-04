@@ -56,21 +56,22 @@ void draw() {
       c1.update();//catcher follows the mouse
       //when you reach a certain score, you pass a level
       if (score == 10) { //sets level 1
-        textMode(CENTER);
+        textAlign(CENTER);
         textSize(40);
         fill(252, 33, 33);
-        text("You passed Level 1", 100, height/2);
+        text("You passed Level 1", width/2, height/2);
       }
       if (score == 30) {//sets level 2
-        textMode(CENTER);
+        textAlign(CENTER);
         textSize(40);
         fill(252, 33, 33);
-        text("You passed Level 2", 100, height/2);
+        text("You passed Level 2", width/2, height/2);
       }
       if (score == 60) {//game is won when the score is equal to 60
         background(0);
         fill(random(255), random(255), random(255));
         textSize(80);
+        textAlign(CENTER);
         text("WINNER", width/2, height/2);
         drops[i].leave(); //raindrops go away
         lives= 4;//gets rid of the life circles
